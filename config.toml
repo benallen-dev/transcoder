@@ -1,0 +1,13 @@
+# NapTime is how many seconds to wait before checking the watch dir again if it's empty
+NapTime = "5s"
+
+[Dirs]
+Watch = "/home/benallen/projects/transcoder/data/watch"
+Output = "/home/benallen/projects/transcoder/data/output"
+Done = "/home/benallen/projects/transcoder/data/done"
+Problem = "/home/benallen/projects/transcoder/data/problem"
+
+[Output]
+MaxHeight = 1080
+MaxWidth = 1920
+MaxBitrate = 4
