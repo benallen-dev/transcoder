@@ -8,6 +8,7 @@ Done = "/home/benallen/projects/transcoder/data/done"
 Problem = "/home/benallen/projects/transcoder/data/problem"
 
 [Output]
-MaxHeight = 1080
-MaxWidth = 1920
-MaxBitrate = 4
+MaxWidth = 1280
+MaxHeight = 720
+MaxBitrate = 4 # Mbit/s
+Crf = 27

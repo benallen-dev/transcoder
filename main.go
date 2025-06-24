@@ -78,23 +78,29 @@ func main() {
 		var height = strconv.Itoa(conf.Output.MaxHeight)
 		var bitrate = strconv.Itoa(conf.Output.MaxBitrate)
 		var bufsize = strconv.Itoa(2 * conf.Output.MaxBitrate)
-		var targetFile = filepath.Join(conf.Dirs.Output, f+".mkv")
+		var crf = strconv.Itoa(conf.Output.Crf)
+		var targetFile = filepath.Join(conf.Dirs.Output, f+".mp4")
 
 		cmd := exec.Command("ffmpeg",
-			// "-hwaccel", "cuda",
 			"-i", loc,
-			"-vf", fmt.Sprintf("scale='min(%s,iw)':'min(%s,ih)':force_original_aspect_ratio=decrease", width, height),
+			"-vf", fmt.Sprintf("scale='min(%s,iw)':'min(%s,ih)':force_original_aspect_ratio=decrease,scale=trunc(iw/2)*2:trunc(ih/2)*2", width, height),
+
 			"-b:v", bitrate+"M",
 			"-maxrate", bitrate+"M",
 			"-bufsize", bufsize+"M",
 			"-map", "0:v:0",
 			"-map", "0:m:language:eng",
 			"-map", "0:a:0",
+			"-map", "-0:s", // strip subs
 			"-ac", "2",
+
 			"-c:v", "libx265",
+			"-tag:v", "hvc1",
+			"-crf", crf,
+			"-x265-params", "keyint=60:min-keyint=60:no-scenecut=1",
+  			"-movflags", "+faststart",
+
 			"-preset", "fast",
-			// "-tag", "hvc1",
-			"-crf", "27",
 			"-c:a", "aac",
 			"-b:a", "192k",
 			targetFile,

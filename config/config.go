@@ -17,6 +17,7 @@ type Config struct {
 		Problem string
 	}
 	Output struct {
+		Crf        int
 		MaxHeight  int
 		MaxWidth   int
 		MaxBitrate int
