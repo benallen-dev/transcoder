@@ -34,6 +34,13 @@ func moveFileToProblemDir(conf *config.Config, file string) error {
 	return os.Rename(ogLoc, newLoc)
 }
 
+func moveFileToDoneDir(conf *config.Config, file string) error {
+	ogLoc := filepath.Join(conf.Dirs.Watch, file)
+	newLoc := filepath.Join(conf.Dirs.Done, file)
+	logger.Info("Moving processed file to done", "file", file)
+	return os.Rename(ogLoc, newLoc)
+}
+
 func main() {
 	conf, err := config.Load()
 	if err != nil {
@@ -98,7 +105,7 @@ func main() {
 			"-tag:v", "hvc1",
 			"-crf", crf,
 			"-x265-params", "keyint=60:min-keyint=60:no-scenecut=1",
-  			"-movflags", "+faststart",
+			"-movflags", "+faststart",
 
 			"-preset", "fast",
 			"-c:a", "aac",
@@ -122,10 +129,6 @@ func main() {
 			continue
 		}
 
-		// Move the source file from Watch dir to Done dir
-		newLoc := filepath.Join(conf.Dirs.Done, f)
-		logger.Info("Moving processed file to done", "file", f)
-		os.Rename(loc, newLoc)
+		moveFileToDoneDir(conf, f)
 	}
-
 }

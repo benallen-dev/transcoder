@@ -11,4 +11,4 @@ Problem = "/home/benallen/projects/transcoder/data/problem"
 MaxWidth = 1280
 MaxHeight = 720
 MaxBitrate = 4 # Mbit/s
-Crf = 27
+Crf = 26
