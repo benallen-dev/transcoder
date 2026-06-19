@@ -1,4 +1,4 @@
-# NapTime is how many seconds to wait before checking the watch dir again if it's empty
+# NapTime is how many seconds inbetween scans of the watch dir
 NapTime = "5s"
 
 [Dirs]

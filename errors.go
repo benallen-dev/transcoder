@@ -40,3 +40,18 @@ func NewCommandExecutionError(f string, c string, e error) *CommandExecutionErro
 		ogError: e,
 	}
 }
+
+//  ── ContextCancellationError ─────────────────────────────────────────────
+type CommandCancellationError struct {
+	ogError error
+}
+
+func (e CommandCancellationError) Error() string {
+	return fmt.Sprintf("Command canceled: %s", e.ogError.Error())
+}
+
+func NewCommandCancellationError(e error) *CommandCancellationError {
+	return &CommandCancellationError{
+		ogError: e,
+	}
+}

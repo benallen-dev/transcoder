@@ -11,9 +11,8 @@ var defaultLogger *slog.Logger
 func init() {
 	defaultLogger = slog.New(&FancyTextHandler{
 		writer: os.Stdout,
-		level:  slog.LevelDebug,
+		level:  slog.LevelInfo,
 	})
-
 }
 
 func PrintObj(obj any) string {
